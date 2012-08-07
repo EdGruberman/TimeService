@@ -1,0 +1,27 @@
+name: @NAME@
+description: API for player custom timestamps
+version: @VERSION@
+author: @AUTHOR@
+main: @MAIN@
+commands:
+    'simpletemplate:command.action':
+        aliases: [action, command.action]
+        description: Reload SimpleTemplate plugin
+        permission: simpletemplate.command.action
+        usage: /<command>
+    'timeservice:reload':
+        description: Reload TimeService plugin
+        permission: timeservice.reload
+        usage: /<command>
+permissions:
+    simpletemplate.info:
+        description: Can use basic information commands
+        default: true
+        children:
+            simpletemplate.command.action: true
+    simpletemplate.admin:
+        description: Can use all commands
+        default: op
+        children:
+            simpletemplate.info: true
+            simpletempate.reload: true

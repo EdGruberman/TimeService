@@ -1,0 +1,7 @@
+logLevel: INFO
+messages:
+    requiresPlayer: '-> Command cancelled when §cnot in-game player'
+    requiresArgument: '-> Required §cargument missing§r: %2$s' # 2 = Argument Name
+    unknownArgument: '-> §cUnable to determine %2$s§r: %3$s' # 2 = Argument Name, 3 = Argument Value
+    reload: '-> TimeService plugin §2reloaded'
+version: @VERSION@
