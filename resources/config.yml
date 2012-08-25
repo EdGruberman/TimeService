@@ -1,7 +1,13 @@
 logLevel: INFO
 messages:
-    requiresPlayer: '-> Command cancelled when §cnot in-game player'
-    requiresArgument: '-> Required §cargument missing§r: %2$s' # 2 = Argument Name
-    unknownArgument: '-> §cUnable to determine %2$s§r: %3$s' # 2 = Argument Name, 3 = Argument Value
-    reload: '-> TimeService plugin §2reloaded'
+    timeZoneCurrent: '-> Time zone for {1} is {2} ({3})' # 1 = Player, 2 = Time Zone ID, 3 = Time Zone Display Name
+    timeZoneNotFound: '-> No time zone matches filter: {1}' # 1 = <TimeZone>
+    timeZoneResult:
+        line: '-> {1} ({2})' # 1 = Time Zone ID, 2 = Time Zone Display Name
+        footer: '-> Page {1} of {2} ({3} time zones found)' # 1 = Current Page, 2 = Total Page Count, 3 = Total Time Zones
+    timeZoneSuccess: '-> Set time zone for {1} to {2} ({3})' # 1 = Player, 2 = Time Zone, 3 = Time Zone Display Name
+    requiresPlayer: '-> §cOnly in-game players§r can use the {1} command' # 1 = Command Label
+    requiresArgument: '-> Required §cargument missing§r: {1}' # 1 = Argument Name
+    unknownArgument: '-> §cUnable to determine§r §o{1}§r: {2}' # 1 = Argument Name, 2 = Argument Value
+    reload: '-> {1} plugin §2reloaded' # 1 = Plugin Name
 version: @VERSION@

@@ -1,62 +1,46 @@
 package edgruberman.bukkit.timeservice.commands;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.text.StrTokenizer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+/** transforms simple space delimited command arguments to allow for double quote delimited arguments containing spaces */
 abstract class Executor implements CommandExecutor {
+
+    protected final StrTokenizer tokenizer = new StrTokenizer();
+
+    protected Executor() {
+        this.tokenizer.setDelimiterChar(' ');
+        this.tokenizer.setQuoteChar('"');
+    }
 
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-        return this.execute(sender, command, label, Executor.transform(args));
+        return this.execute(sender, command, label, this.transform(args));
     }
 
     protected abstract boolean execute(final CommandSender sender, final Command command, final String label, final List<String> args);
 
-    /**
-     * Concatenate arguments to compensate for double quotes indicating single
-     * argument, removing any delimiting double quotes
-     *
-     * TODO use \ for escaping double quote characters
-     * TODO make this less messy
-     */
-    private static List<String> transform(final String[] args) {
-        final List<String> arguments = new ArrayList<String>();
-
-        String previous = null;
-        for (final String arg : args) {
-            if (previous != null) {
-                if (arg.endsWith("\"")) {
-                    arguments.add(Executor.stripDoubleQuotes(previous + " " + arg));
-                    previous = null;
-                } else {
-                    previous += " " + arg;
-                }
-                continue;
-            }
-
-            if (arg.startsWith("\"") && !arg.endsWith("\"")) {
-                previous = arg;
-            } else {
-                arguments.add(Executor.stripDoubleQuotes(arg));
-            }
-        }
-        if (previous != null) arguments.add(Executor.stripDoubleQuotes(previous));
-
-        return arguments;
+    protected List<String> transform(final String... args) {
+        this.tokenizer.reset(Executor.join(args, " "));
+        return Arrays.asList(this.tokenizer.getTokenArray());
     }
 
-    private static String stripDoubleQuotes(final String s) {
-        return Executor.stripDelimiters(s, "\"");
+    protected static String join(final List<String> args, final String delim) {
+        return Executor.join(args.toArray(new String[args.size()]), delim);
     }
 
-    private static String stripDelimiters(final String s, final String delim) {
-        if (!s.startsWith(delim) || !s.endsWith(delim)) return s;
+    protected static String join(final String[] args, final String delim) {
+        if (args == null || args.length == 0) return "";
 
-        return s.substring(1, s.length() - 1);
+        final StringBuilder sb = new StringBuilder();
+        for (final String s : args) sb.append(s + delim);
+        sb.delete(sb.length() - delim.length(), sb.length());
+        return sb.toString();
     }
 
 }

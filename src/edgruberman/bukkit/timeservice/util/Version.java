@@ -1,11 +1,11 @@
-package edgruberman.bukkit.timeservice;
+package edgruberman.bukkit.timeservice.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** Format: Major.Minor.Revision[(Type)Build] Example: 1.2.3a4 */
+/** Format: Major.Minor.Revision[(Type)Build] Example: 1.2.3a17 */
 public final class Version implements Comparable<Version> {
 
     public final String original;
@@ -51,6 +51,8 @@ public final class Version implements Comparable<Version> {
         if (this.original == null && other.original == null) return 0;
         if (this.original == null && other.original != null) return -1;
 
+        if (this.original.equals(other.original)) return 0;
+
         // Determine what is different, favoring the more important segments first
         if (this.major != other.major) return this.major.compareTo(other.major);
         if (this.minor != other.minor) return this.minor.compareTo(other.minor);
@@ -67,7 +69,7 @@ public final class Version implements Comparable<Version> {
 
         public static final Type ALPHA = new Type("a", 0);
         public static final Type BETA = new Type("b", 1);
-        public static final Type CANDIDATE = new Type("c", 2);
+        public static final Type CANDIDATE = new Type("rc", 2);
         public static final Type PRODUCTION = new Type("", 3);
 
         public static Type parse(final String designator) {

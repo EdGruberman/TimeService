@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
-import edgruberman.bukkit.timeservice.TimeService;
+import edgruberman.bukkit.timeservice.Main;
 
 public final class Reload implements CommandExecutor {
 
@@ -19,7 +19,7 @@ public final class Reload implements CommandExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         this.plugin.onDisable();
         this.plugin.onEnable();
-        TimeService.messenger.tell(sender, "messages.reload");
+        Main.courier.send(sender, "messages.reload", this.plugin.getName());
         return true;
     }
 
