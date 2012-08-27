@@ -1,8 +1,9 @@
 name: @NAME@
-description: Manages player time zones
 version: @VERSION@
-author: @AUTHOR@
-main: @MAIN@
+description: Manages player time zones
+author: EdGruberman (ed@rjump.com)
+website: http://github.com/EdGruberman
+main: edgruberman.bukkit.timeservice.Main
 commands:
     'timeservice:timezone':
         aliases: [timezone, zone]
