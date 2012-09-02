@@ -1,8 +1,8 @@
-name: @NAME@
+name: TimeService
 version: @VERSION@
 description: Manages player time zones
 author: EdGruberman (ed@rjump.com)
-website: http://github.com/EdGruberman
+website: http://github.com/EdGruberman/TimeService
 main: edgruberman.bukkit.timeservice.Main
 commands:
     'timeservice:timezone':
