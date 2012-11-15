@@ -19,7 +19,7 @@ public final class Main extends CustomPlugin {
     public static Horologist horologist = null;
 
     @Override
-    public void onLoad() { this.putConfigMinimum("config.yml", "1.0.0"); }
+    public void onLoad() { this.putConfigMinimum(CustomPlugin.CONFIGURATION_FILE, "1.0.0"); }
 
     @Override
     public void onEnable() {
