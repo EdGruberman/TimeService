@@ -1,0 +1,13 @@
+format-code: '§'
+time-zone:
+  current: |- # 0 = generated, 1 = player, 2 = zone id, 3 = zone display, 4 = raw offset, 5 = DST offset
+    §f-> §7Time zone§8: §2{3} §8(§7{2}§8)
+    §f-> §7UTC Offset§8: §2{4} §8(§7DST§8: §7{5}§8)
+    §f-> §7To change§8: §b/zone §3§ozone
+  not-found: '§f-> §7Time zone §enot found§8: §f{1}' # 0 = generated, 1 = zone
+  result:
+    line: '§f-> §2{2} §8(§7{1}§8)' # 0 = generated, 1 = zone id, 2 = zone display
+    footer: '-§f> §7Page §f{1} §7of {2} §8(§7{3} zones§8)' # 0 = generated, 1 = page, 2 = page count, 3 = time zone count
+  success: '§f-> §2Changed time zone§7 to §2{3} §8(§7{2}§8)' # 0 = generated, 1 = player, 2 = zone id, 3 = zone display
+reload: '§f-> §2Reloaded §7{1} plugin' # 0 = generated, 1 = plugin name
+requires-player: '§f-> §cOnly in-game players§7 can use the §b/{1} §7command' # 0 = generated, 1 = label

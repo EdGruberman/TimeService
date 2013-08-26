@@ -5,30 +5,29 @@ author: EdGruberman (ed@rjump.com)
 website: http://github.com/EdGruberman/TimeService
 main: edgruberman.bukkit.timeservice.Main
 commands:
-    'timeservice:timezone':
-        aliases: [timezone, zone]
-        description: View or set time zone
-        permission: timeservice.timezone
-        usage: /<command>[ <TimeZone>[ <Page>]]
-    'timeservice:timezone.default':
-        aliases: [timezone.default, zone.default]
-        description: View or set default time zone
-        permission: timeservice.timezone.default
-        usage: /<command>[ <TimeZone>]
-    'timeservice:reload':
-        description: Reload TimeService plugin
-        permission: timeservice.reload
-        usage: /<command>
+  'timeservice:timezone':
+    aliases: [timezone, zone]
+    description: View or set time zone
+    permission: timeservice.timezone
+    usage: '§f-> §7Usage: §b/<command> §3[§ozone§3] [§opage§3]'
+  'timeservice:default':
+    description: View or set default time zone
+    permission: timeservice.default
+    usage: '§f-> §7Usage: §b/<command> §3[§ozone§3]'
+  'timeservice:reload':
+    description: Reload TimeService plugin
+    permission: timeservice.reload
+    usage: '§f-> §7Usage: §b/<command>'
 permissions:
-    timeservice.user:
-        description: Can use basic commands
-        default: true
-        children:
-            timeservice.timezone: true
-    timeservice.admin:
-        description: Can use all commands
-        default: op
-        children:
-            timeservice.user: true
-            timeservice.timezone.default: true
-            timeservice.reload: true
+  timeservice.user:
+    description: Can use basic features
+    default: true
+    children:
+      timeservice.timezone: true
+  timeservice.admin:
+    description: Can use all features
+    default: op
+    children:
+      timeservice.user: true
+      timeservice.default: true
+      timeservice.reload: true

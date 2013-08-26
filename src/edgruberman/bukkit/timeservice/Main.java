@@ -7,24 +7,28 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.bukkit.event.HandlerList;
+
 import edgruberman.bukkit.timeservice.commands.Reload;
 import edgruberman.bukkit.timeservice.commands.TimeZone;
-import edgruberman.bukkit.timeservice.messaging.ConfigurationCourier;
-import edgruberman.bukkit.timeservice.messaging.Courier;
+import edgruberman.bukkit.timeservice.messaging.Courier.ConfigurationCourier;
 import edgruberman.bukkit.timeservice.util.CustomPlugin;
 
 public final class Main extends CustomPlugin {
 
-    public static Courier courier = null;
+    public static ConfigurationCourier courier = null;
     public static Horologist horologist = null;
 
     @Override
-    public void onLoad() { this.putConfigMinimum(CustomPlugin.CONFIGURATION_FILE, "1.0.0"); }
+    public void onLoad() {
+        this.putConfigMinimum("1.1.0");
+        this.putConfigMinimum("language.yml", "1.1.0");
+        }
 
     @Override
     public void onEnable() {
         this.reloadConfig();
-        Main.courier = ConfigurationCourier.Factory.create(this).setBase("messages").build();
+        Main.courier = ConfigurationCourier.Factory.create(this).setBase(this.loadConfig("language.yml")).setFormatCode("format-code").build();
 
         Main.horologist = new Horologist(this, new File(this.getDataFolder(), "zones.yml"));
 
@@ -44,8 +48,9 @@ public final class Main extends CustomPlugin {
 
     @Override
     public void onDisable() {
-        Main.courier = null;
+        HandlerList.unregisterAll(Main.horologist);
         Main.horologist = null;
+        Main.courier = null;
     }
 
 }

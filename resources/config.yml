@@ -1,17 +1,3 @@
 logLevel: INFO
 exclude: [^SystemV.*]
-messages:
-    timeZoneCurrent: # 1 = Player, 2 = Time Zone ID, 3 = Time Zone Display Name, 4 = Raw Offset, 5 = DST Offset
-        - '-> Time zone: §2{3} §7({2})'
-        - '-> UTC Offset: §2{4} §7(DST: {5})'
-        - '-> §7To change: §5/zone §o<TimeZone>'
-    timeZoneNotFound: '-> Time zone §enot found§r: {1}' # 1 = <TimeZone>
-    timeZoneResult:
-        line: '-> §2{2} §7({1})' # 1 = Time Zone ID, 2 = Time Zone Display Name
-        footer: '-> §7Page {1} of {2} §8({3} zones)' # 1 = Current Page, 2 = Total Page Count, 3 = Total Time Zones
-    timeZoneSuccess: '-> §2Changed time zone§r to {3} ({2})' # 1 = Player, 2 = Time Zone, 3 = Time Zone Display Name
-    requiresPlayer: '-> §cOnly in-game players§r can use the {1} command' # 1 = Command Label
-    requiresArgument: '-> Required §cargument missing§r: {1}' # 1 = Argument Name
-    unknownArgument: '-> §cUnable to determine§r §o{1}§r: {2}' # 1 = Argument Name, 2 = Argument Value
-    reload: '-> {1} plugin §2reloaded' # 1 = Plugin Name
 version: @VERSION@

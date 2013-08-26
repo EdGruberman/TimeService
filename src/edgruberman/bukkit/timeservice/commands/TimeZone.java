@@ -15,8 +15,9 @@ import org.bukkit.entity.Player;
 
 import edgruberman.bukkit.timeservice.Horologist;
 import edgruberman.bukkit.timeservice.Main;
+import edgruberman.bukkit.timeservice.util.TokenizedExecutor;
 
-public final class TimeZone extends Executor {
+public final class TimeZone extends TokenizedExecutor {
 
     private static final int PAGE_SIZE = 9;
 
@@ -26,11 +27,11 @@ public final class TimeZone extends Executor {
         this.exclude = exclude;
     }
 
-    // usage: /<command>[ <TimeZone>[ <Page>]]
+    // usage: /<command> [zone] [page] [player]
     @Override
-    public boolean execute(final CommandSender sender, final Command command, final String label, final List<String> args) {
+    protected boolean onCommand(final CommandSender sender, final Command command, final String label, final List<String> args) {
         if (!(sender instanceof Player)) {
-            Main.courier.send(sender, "requiresPlayer", label);
+            Main.courier.send(sender, "requires-player", label);
             return true;
         }
 
@@ -38,7 +39,7 @@ public final class TimeZone extends Executor {
         if (value == null) {
             // show current zone for sender
             final java.util.TimeZone zone = Horologist.getTimeZone((Player) sender);
-            Main.courier.send(sender, "timeZoneCurrent"
+            Main.courier.send(sender, "time-zone.current"
                     , sender.getName(), zone.getID(), zone.getDisplayName()
                     , TimeZone.formatOffset(zone.getRawOffset()), TimeZone.formatOffset(zone.getDSTSavings()));
             return true;
@@ -78,7 +79,7 @@ public final class TimeZone extends Executor {
         }
 
         if (available.size() == 0) {
-            Main.courier.send(sender, "timeZoneNotFound", value);
+            Main.courier.send(sender, "time-zone.not-found", value);
             return true;
 
         } else if (available.size() > 1) {
@@ -89,18 +90,18 @@ public final class TimeZone extends Executor {
             final int lineLast = Math.min(lineFirst + TimeZone.PAGE_SIZE - 1, available.size() - 1);
 
             for (int i = lineFirst; i <= lineLast; i++)
-                Main.courier.send(sender, "timeZoneResult.line"
+                Main.courier.send(sender, "time-zone.result.line"
                         , available.get(i), java.util.TimeZone.getTimeZone(available.get(i)).getDisplayName());
 
-            Main.courier.send(sender, "timeZoneResult.footer", pageCurrent, pageTotal, available.size());
+            Main.courier.send(sender, "time-zone.result.footer", pageCurrent, pageTotal, available.size());
             return true;
         }
 
         // set time zone
         final java.util.TimeZone zone = java.util.TimeZone.getTimeZone(available.get(0));
         Main.horologist.set(sender.getName(), zone);
-        Main.courier.send(sender, "timeZoneSuccess", sender.getName(), zone.getID(), zone.getDisplayName());
-        this.execute(sender, command, label, Collections.<String>emptyList());
+        Main.courier.send(sender, "time-zone.success", sender.getName(), zone.getID(), zone.getDisplayName());
+        this.onCommand(sender, command, label, Collections.<String>emptyList());
         return true;
     }
 
