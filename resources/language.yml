@@ -11,3 +11,4 @@ time-zone:
   success: '§f-> §2Changed time zone§7 to §2{3} §8(§7{2}§8)' # 0 = generated, 1 = player, 2 = zone id, 3 = zone display
 reload: '§f-> §2Reloaded §7{1} plugin' # 0 = generated, 1 = plugin name
 requires-player: '§f-> §cOnly in-game players§7 can use the §b/{1} §7command' # 0 = generated, 1 = label
+version: @VERSION@
